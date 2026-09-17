@@ -1,0 +1,10 @@
+<?php
+$message = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $asset_id = trim($_POST['asset_id'] ?? '');
+    $user_id = trim($_POST['user_id'] ?? '');
+    $message = ($asset_id !== '' && $user_id !== '') ? 'Borrow request submitted for review.' : 'Asset ID and User ID are required.';
+}
+?>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Borrow Asset - CCGC</title><style>body{font-family:Arial,sans-serif;background:#f5f5f5;margin:0}nav{background:#fff;padding:12px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid #ddd}nav h1{font-size:18px;color:#ff6b18;margin:0}nav a{color:#555;text-decoration:none;margin:4px 8px;font-weight:bold;padding:6px 10px;border-radius:5px}nav a:hover,nav a.active{background:#ff6b18;color:#fff}.container{max-width:450px;margin:60px auto;padding:25px;background:#fff;border-radius:8px;box-shadow:0 4px 12px #0002}h2{color:#ff6b18;text-align:center}label{display:block;margin-top:12px}input{width:100%;padding:9px;margin-top:5px;border:1px solid #ccc;border-radius:5px;box-sizing:border-box}.btn{width:100%;margin-top:20px;padding:10px;background:#ff6b18;color:#fff;border:0;border-radius:5px;font-weight:bold;cursor:pointer}.message{padding:10px;background:#eaf7ea;color:#176b25;margin-top:15px}</style></head><body><nav><h1>CCGC Asset Management</h1><div><a href="index.html">Home</a><a href="features.html">Features</a><a href="borrow.php" class="active">Borrow</a><a href="login.php">Login</a></div></nav><div class="container"><h2>Borrow an Asset</h2><?php if($message): ?><div class="message"><?= htmlspecialchars($message) ?></div><?php endif; ?><form action="borrow.php" method="post"><label for="asset_id">Asset ID:</label><input type="text" id="asset_id" name="asset_id" required><label for="user_id">User ID:</label><input type="text" id="user_id" name="user_id" required><button type="submit" class="btn">Borrow Asset</button></form></div></body></html>
